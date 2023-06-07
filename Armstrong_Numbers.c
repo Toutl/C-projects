@@ -1,40 +1,38 @@
 #include <stdio.h>
 #include <math.h>
 
-// Armstrong Numbers_v2
+// Armstrong Numbers_v3
 // By: Ubaldo Neri
+
+// An Armstrong Number is a number that is the sum of its own digits each raised to the power of the number of digits.
 
 int main()
 {
-    int candidate, x = 0, y, lng = 0;
+    int Candidate, tempVar, digitCount, processResult = 0;
 
-    // Input
-    printf("\n Ingresa un numero entero: ");
-    scanf("%d", &candidate);
+    printf("\n Enter a Whole number: ");
+    scanf("%d", &Candidate);
 
-    // Process
-    y = candidate;
-    while (y != 0)
+    digitCount = log10(Candidate) + 1;
+
+    tempVar = Candidate;
+    while (tempVar != 0)
     {
-        y /= 10;
-        lng++;
+        processResult += pow(tempVar % 10, digitCount);
+        tempVar /= 10;
     }
 
-    y = candidate;
-    while (y != 0)
+    if (Candidate < 0)
     {
-        x += pow(y % 10, lng);
-        y /= 10;
+        printf("  - Error!\n");
     }
-
-    // Checkup & Ouput
-    if (x == candidate)
+    else if (processResult == Candidate)
     {
-        printf("  - SI es un numero Armstrong\n");
+        printf("  - '%d' is an Armstrong Number\n", Candidate);
     }
     else
     {
-        printf("  - NO es un numero Armstrong\n");
+        printf("  - '%d' is not an Armstrong Number\n", Candidate);
     }
     return 0;
 }
