@@ -2,35 +2,37 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Isogram
+// Isogram_v2.1
 // By: Ubaldo Neri
 
-int main(){
-	char giv[30];
-	printf("\nIngresa una palabra: ");
-	scanf("%s", giv);
-	int larg = strlen(giv);
-	int fin = 0;
-  for (int let = 0; let < (larg); let++) {
-  	for (int otr = 0; otr < (larg); otr++) {
-	  if (giv[let] == giv[otr] || giv[let] == giv[otr]+32 && giv[otr] != '-' && giv[otr] != ' ')
-		if (let != otr)
-		  fin = 1;
-		else
-		  continue;
-	  else
-		continue;
-	}
-  }
-  switch (fin){
-  case 0:
-	printf("\nSI es un isograma");
-	break;
-  case 1:
-	printf("\nNO es un isograma\n");
-	break;
-  default:
-	break;
-  }
-  return 0;
+int main()
+{
+    system("cls");
+    char phrase[50];
+    printf("\n Enter a Word: ");
+    fgets(phrase, sizeof(phrase), stdin);
+    phrase[strcspn(phrase, "\n")] = '\0';
+    if (!phrase || strcmp(phrase, "\0\0") == 0)
+    {
+        printf("  - Error!\n");
+        return 0;
+    }
+    int lng = strlen(phrase);
+    for (int c = 0; c < lng; c++)
+    {
+        for (int v = 0; v < lng; v++)
+        {
+            if (phrase[v] == '-' || phrase[v] == ' ' || c == v)
+            {
+                continue;
+            }
+            if (phrase[c] == phrase[v] || phrase[c] == phrase[v] + 32 || phrase[c] + 32 == phrase[v])
+            {
+                printf("  - '%s' is not an Isogram\n", phrase);
+                return 0;
+            }
+        }
+    }
+    printf("  - '%s' is an Isogram\n", phrase);
+    return 0;
 }
