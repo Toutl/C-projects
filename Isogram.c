@@ -1,38 +1,46 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
-// Isogram_v2.1
+// Isogram_v3
 // By: Ubaldo Neri
+
+// Definition: An isogram (also known as a "non-pattern word") is a word or word without a repeating letter, however spaces and hyphens are allowed to appear multiple times.
 
 int main()
 {
-    system("cls");
-    char phrase[50];
+    char word[50];
+
     printf("\n Enter a Word: ");
-    fgets(phrase, sizeof(phrase), stdin);
-    phrase[strcspn(phrase, "\n")] = '\0';
-    if (!phrase || strcmp(phrase, "\0\0") == 0)
+    fgets(word, sizeof(word), stdin);
+    word[strcspn(word, "\n")] = '\0';
+
+    if (!word || strcmp(word, "\0\0") == 0)
     {
         printf("  - Error!\n");
         return 0;
     }
-    int lng = strlen(phrase);
-    for (int c = 0; c < lng; c++)
+    
+    int wordLength = strlen(word);
+    
+    for (int currentChar = 0; currentChar < wordLength; currentChar++)
     {
-        for (int v = 0; v < lng; v++)
+        for (int comparisonChar = 0; comparisonChar < wordLength; comparisonChar++)
         {
-            if (phrase[v] == '-' || phrase[v] == ' ' || c == v)
+            if (word[comparisonChar] == '-' || word[comparisonChar] == ' ' || currentChar == comparisonChar)
             {
                 continue;
             }
-            if (phrase[c] == phrase[v] || phrase[c] == phrase[v] + 32 || phrase[c] + 32 == phrase[v])
+
+            if (word[currentChar] == word[comparisonChar] || word[currentChar] == word[comparisonChar] + 32 || word[currentChar] + 32 == word[comparisonChar])
             {
-                printf("  - '%s' is not an Isogram\n", phrase);
+                printf("  - '%s' is not an Isogram\n", word);
                 return 0;
             }
         }
     }
-    printf("  - '%s' is an Isogram\n", phrase);
+
+    printf("  - '%s' is an Isogram\n", word);
+
     return 0;
 }
+    
